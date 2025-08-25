@@ -35,7 +35,13 @@ yarn dev
 
 ## Tech Stack
 
-- Next.js
-- Prisma
-- Docker
-- PostgreSQL
+- [x] Next.js
+- [x] TypeScript
+- [x] Redux Toolkit
+- [x] Tailwind CSS
+- [x] Zod
+- [x] React Hook Form
+- [x] Docker
+- [x] Prisma
+- [x] PostgreSQL
+- [x] Jest & React Testing Library
