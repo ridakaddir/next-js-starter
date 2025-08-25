@@ -1,7 +1,7 @@
 'use server'
 
 import { prisma } from "@/lib/prisma";
-import { Customer } from "@/features/customers/customerSlice";
+import { Customer } from "@/_features/customers/customerSlice";
 
 export const getAllCustomers = async () => {
     const customers = await prisma.customer.findMany({

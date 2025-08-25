@@ -7,8 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootState, AppDispatch } from '@/store/store'
 import { addCustomerAsync, deleteCustomerAsync, fetchCustomersAsync, updateCustomerAsync, type Customer } from './customerSlice'
-import { Card, CardHeader, CardBody } from '@/uikit/Card'
-import { TextInput, Button } from '@/uikit/Form'
+import { Card, CardHeader, CardBody } from 'uikit/Card'
+import { TextInput, Button } from 'uikit/Form'
 
 // Shared validation schema for create/edit
 const customerSchema = z.object({

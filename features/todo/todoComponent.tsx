@@ -3,7 +3,7 @@
 import React from 'react'
 
 import { RootState, useAppDispatch } from '@/store/store'
-import { toggleTodoAsync, removeTodoAsync, fetchTodos, addTodoAsync } from '@/features/todo/todoSlice'
+import { toggleTodoAsync, removeTodoAsync, fetchTodos, addTodoAsync } from 'features/todo/todoSlice'
 import { useSelector } from 'react-redux'
 
 export function TodoList() {

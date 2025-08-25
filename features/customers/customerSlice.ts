@@ -1,4 +1,4 @@
-import { createCustomer, deleteCustomer, getAllCustomers, updateCustomer } from '@/features/customers/customers.server'
+import { createCustomer, deleteCustomer, getAllCustomers, updateCustomer } from 'features/customers/customers.server'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export type Customer = {

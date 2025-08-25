@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import todoReducer from '@/features/todo/todoSlice'
-import customersReducer from '@/features/customers/customerSlice'
+import todoReducer from 'features/todo/todoSlice'
+import customersReducer from 'features/customers/customerSlice'
 import { useDispatch } from 'react-redux'
 
 export const store = configureStore({
   reducer: {
     todo: todoReducer,
-  customers: customersReducer,
+    customers: customersReducer,
   },
 })
 

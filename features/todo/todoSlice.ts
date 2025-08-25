@@ -1,5 +1,5 @@
 // Custom thunk to add a todo and then fetch todos from backend
-import { createTodo, deleteTodo, getAllTodos, updateTodo } from "@/features/todo/todos.server";
+import { createTodo, deleteTodo, getAllTodos, updateTodo } from "features/todo/todos.server";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export interface Todo {
@@ -29,7 +29,7 @@ export const removeTodoAsync = createAsyncThunk<void, string>(
     }
 );
 
-export const toggleTodoAsync = createAsyncThunk<void, Todo>(
+export const toggleTodoAsync = createAsyncThunk<Todo, Todo>(
     "todo/toggleTodo",
     async (todo) => {
         return updateTodo(todo.id, !todo.completed);
