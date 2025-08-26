@@ -1,5 +1,6 @@
 "use client"
 
+import SignIn from "@/features/sign-in/sign-in"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import React from "react"
@@ -19,12 +20,12 @@ export default function AppShell({ children }: Props) {
   const pathname = usePathname()
 
   const linkCls = (href: string) =>
-    `block rounded-md px-3 py-2 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-900 ${
-      pathname === href ? "bg-neutral-100 dark:bg-neutral-900 font-medium" : ""
+    `block rounded-md px-3 py-2 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-900 ${pathname === href ? "bg-neutral-100 dark:bg-neutral-900 font-medium" : ""
     }`
 
   return (
     <div className="min-h-screen flex bg-[var(--background)] text-[var(--foreground)]">
+      <SignIn />
       {/* Mobile drawer */}
       <div className={`fixed inset-0 z-40 md:hidden ${open ? "" : "pointer-events-none"}`}>
         <div
@@ -33,9 +34,8 @@ export default function AppShell({ children }: Props) {
           aria-hidden
         />
         <aside
-          className={`absolute left-0 top-0 bottom-0 w-64 border-r border-neutral-200/70 dark:border-neutral-800/60 bg-white dark:bg-neutral-950 shadow-xl transform transition-transform ${
-            open ? "translate-x-0" : "-translate-x-full"
-          }`}
+          className={`absolute left-0 top-0 bottom-0 w-64 border-r border-neutral-200/70 dark:border-neutral-800/60 bg-white dark:bg-neutral-950 shadow-xl transform transition-transform ${open ? "translate-x-0" : "-translate-x-full"
+            }`}
           aria-label="Sidebar"
         >
           <div className="p-4 border-b border-neutral-200/70 dark:border-neutral-800/60">
