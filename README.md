@@ -29,9 +29,10 @@ yarn install
 yarn dev
 ```
 
-## Environment Variables
+## Environment Variables (WIP)
 
 - `DATABASE_URL` – PostgreSQL connection string
+
 
 ## Tech Stack
 
