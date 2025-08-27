@@ -38,12 +38,11 @@ export const authOptions =
             }
         }),
     ],
-    callbacks: {
-        authorized: async ({ auth }) => {
-            // Logged in users are authenticated, otherwise redirect to login page
-            return !!auth
-        },
-    }
+    // callbacks: {
+    //     authorized: async ({ auth }: { auth: unknown }) => {
+    //         return !!auth
+    //     },
+    // }
 }
 
 export const { auth, handlers, signIn, signOut } = NextAuth(authOptions) 
