@@ -1,6 +1,5 @@
 "use client"
 
-import SignIn from "@/features/sign-in/sign-in"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import React from "react"
@@ -25,7 +24,7 @@ export default function AppShell({ children }: Props) {
 
   return (
     <div className="min-h-screen flex bg-[var(--background)] text-[var(--foreground)]">
-      <SignIn />
+
       {/* Mobile drawer */}
       <div className={`fixed inset-0 z-40 md:hidden ${open ? "" : "pointer-events-none"}`}>
         <div

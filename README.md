@@ -46,7 +46,7 @@ yarn dev
 - [x] PostgreSQL
 - [x] Jest & React Testing Library
 - [x] ESLint
+- [x] Auth.js & FusionAuth integration
 - [ ] eslint-plugin-boundaries
 - [ ] Replace Prisma with drizzle-orm
 - [ ] shadcn/ui
-- [ ] Better-Auth
