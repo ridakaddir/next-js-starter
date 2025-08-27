@@ -8,13 +8,13 @@ A Next.js web app with Prisma ORM, packaged for Docker.
 ### 1. Build the Docker image
 
 ```sh
-docker build -t inspector-web-console .
+docker build -t next-js-starter .
 ```
 
 ### 2. Run the app (map port 3000)
 
 ```sh
-docker run --rm -p 3000:3000 inspector-web-console
+docker run --rm -p 3000:3000 next-js-starter
 ```
 
 ### 3. Connect to your database
