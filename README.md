@@ -26,6 +26,8 @@ docker run --rm -p 3000:3000 next-js-starter
 
 ```sh
 yarn install
+yarn prisma:generate
+yarn prisma:migrate
 yarn dev
 ```
 
