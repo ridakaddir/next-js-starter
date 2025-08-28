@@ -24,7 +24,10 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
-ENV DATABASE_URL="postgresql://user:password@host.docker.internal:5432/mydb?schema=public"
+# ENV DATABASE_URL="postgresql://user:password@host.docker.internal:5432/mydb?schema=public"
+
+# update the connection string for Cloud SQL. note that this connection uses Cloud SQL connector (Unix socket)
+ENV DATABASE_URL="postgresql://postgres:Postgres%40123456@localhost/postgres?schema=public&host=/cloudsql/playground-s-11-1ecadc32:us-central1:demo-db&connection_limit=5"
 RUN apk add --no-cache libc6-compat openssl
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
