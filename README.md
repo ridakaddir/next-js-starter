@@ -14,7 +14,7 @@ docker build -t next-js-starter .
 ### 2. Run the app (map port 3000)
 
 ```sh
-docker run --rm -p 3000:3000 next-js-starter
+docker run -e DATABASE_URL="postgresql://postgres:Postgres@123456@host.docker.internal:5432/mydb?schema=public" -p 3000:3000 next-js-starter
 ```
 
 ### 3. Connect to your database
@@ -59,6 +59,7 @@ yarn dev
 - [x] Jest & React Testing Library
 - [x] ESLint
 - [x] Auth.js & FusionAuth integration
+- [x] Google Cloud Run & Cloud SQL
 - [ ] eslint-plugin-boundaries
 - [ ] Replace Prisma with drizzle-orm
 - [ ] shadcn/ui
@@ -72,13 +73,10 @@ yarn dev
 
 First step is to create a Cloud SQL instance of PostgreSQL.
 
-the `Dockerfile` defines the db connection settings. since the db is hosted on Cloud SQL, and the Next.js app runs in Cloud run, the connection string needs to use the Cloud SQL connector (Unix socket).
+once the DB instance is created, pass the `DATABASE_URL` as an environment variable when running the container as described above.
 
-once the DB instance is created, update the connection string in the `Dockerfile` then run the following command to build and deploy the application:
+the `build-and-deploy.sh` script automates the process of building and deploying the application to Google Cloud Platform (GCP) using Cloud Run. make sure to update the script with your specific project and database details.
 
 ```sh
 ./build-and-deploy.sh
 ```
-
-`build-and-deploy.sh` script automates the process of building and deploying the application to Google Cloud Platform (GCP) using Cloud Run.
-
