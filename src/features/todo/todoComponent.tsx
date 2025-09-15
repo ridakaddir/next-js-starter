@@ -1,20 +1,19 @@
 "use client"
 
 import React from 'react'
+import { useTodoActions, useTodos } from './todoStore'
 
-import { RootState, useAppDispatch } from '@/store/store'
-import { toggleTodoAsync, removeTodoAsync, fetchTodos, addTodoAsync } from 'features/todo/todoSlice'
-import { useSelector } from 'react-redux'
 
 export function TodoList() {
-  const todos = useSelector((state: RootState) => state.todo)
-  const dispatch = useAppDispatch()
+  const { items: todos } = useTodos()
+  const { addTodo, fetchTodos, removeTodo, toggleTodo } = useTodoActions()
+
 
   const [newTodo, setNewTodo] = React.useState("")
 
   React.useEffect(() => {
-    dispatch(fetchTodos())
-  }, [dispatch])
+    fetchTodos()
+  }, [fetchTodos])
 
   return (
     <div className="max-w-2xl mx-auto p-6">
@@ -26,10 +25,10 @@ export function TodoList() {
 
         <div className="p-6">
           <form
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault()
               if (newTodo.trim()) {
-                dispatch(addTodoAsync({ text: newTodo, completed: false }))
+                await addTodo(newTodo.trim())
                 setNewTodo("")
               }
             }}
@@ -51,13 +50,13 @@ export function TodoList() {
           </form>
 
           <div className="mt-6">
-            {todos.length === 0 ? (
+            {todos?.length === 0 ? (
               <div className="flex items-center justify-center rounded-xl border border-dashed border-neutral-200/70 dark:border-neutral-800/60 py-10 text-neutral-500 dark:text-neutral-400">
                 No todos yet. Add your first one above.
               </div>
             ) : (
               <ul className="divide-y divide-neutral-200/70 dark:divide-neutral-800/60">
-                {todos.map((todo) => {
+                {todos?.map((todo) => {
                   const checkboxId = `todo-${todo.id}`
                   return (
                     <li key={todo.id} className="flex items-center gap-3 py-3">
@@ -65,7 +64,7 @@ export function TodoList() {
                         id={checkboxId}
                         type="checkbox"
                         checked={todo.completed}
-                        onChange={() => dispatch(toggleTodoAsync(todo))}
+                        onChange={() => toggleTodo(todo.id)}
                         className="h-4 w-4 rounded border-neutral-300 text-blue-600 focus:ring-blue-500"
                       />
                       <label
@@ -76,7 +75,7 @@ export function TodoList() {
                         {todo.text}
                       </label>
                       <button
-                        onClick={() => dispatch(removeTodoAsync(todo.id))}
+                        onClick={() => removeTodo(todo.id)}
                         className="text-sm text-red-600 hover:text-red-500 px-2 py-1 rounded-md hover:bg-red-50 dark:hover:bg-red-950/30"
                         aria-label="Remove todo"
                       >
@@ -90,6 +89,6 @@ export function TodoList() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
