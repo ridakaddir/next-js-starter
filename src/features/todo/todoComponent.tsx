@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { useTodoActions, useTodos } from './todoStore'
+import { useTodoActions, useTodos } from '@/store/store'
 
 
 export function TodoList() {

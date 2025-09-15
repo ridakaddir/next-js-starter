@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { Customer as CustomerProto, UpdateCustomerReq } from '@/lib/grpc/customers_pb';
 import { CustomerServiceClient } from "@/lib/grpc/customers_grpc_pb";
 import { AddCustomerReq, ListCustomersReq } from '@/lib/grpc/customers_pb';
-import { Customer } from './customerStore';
+import { Customer } from './customerSlice';
 
 export const getAllCustomers = async () => {
     const customers = await prisma.customer.findMany({

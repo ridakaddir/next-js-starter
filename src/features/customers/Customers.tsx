@@ -6,7 +6,9 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Card, CardHeader, CardBody } from 'uikit/Card'
 import { TextInput, Button } from 'uikit/Form'
-import { Customer, useCustomerActions, useCustomers } from './customerStore'
+import { useBoundStore, useCustomerActions, useCustomers } from '@/store/store'
+import type { Customer } from './customerSlice'
+
 
 // Shared validation schema for create/edit
 const customerSchema = z.object({
@@ -51,6 +53,7 @@ export default function Customers() {
 
   const { addCustomerAsync, fetchCustomersAsync } = useCustomerActions()
   const { error, status, items } = useCustomers()
+
 
   const fetchCustomers = React.useCallback(async () => {
     await fetchCustomersAsync()
