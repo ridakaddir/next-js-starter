@@ -2,7 +2,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ReduxProvider from "@/store/ReduxProvider";
 import AppShell from "./AppShell";
 import { SessionProvider } from "next-auth/react";
 
@@ -32,11 +31,9 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ReduxProvider>
-          <SessionProvider>
-            <AppShell>{children}</AppShell>
-          </SessionProvider>
-        </ReduxProvider>
+        <SessionProvider>
+          <AppShell>{children}</AppShell>
+        </SessionProvider>
       </body>
     </html>
   );

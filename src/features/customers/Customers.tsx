@@ -4,11 +4,9 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useSelector, useDispatch } from 'react-redux'
-import type { RootState, AppDispatch } from '@/store/store'
-import { addCustomerAsync, deleteCustomerAsync, fetchCustomersAsync, updateCustomerAsync, type Customer } from './customerSlice'
 import { Card, CardHeader, CardBody } from 'uikit/Card'
 import { TextInput, Button } from 'uikit/Form'
+import { Customer, useCustomerActions, useCustomers } from './customerStore'
 
 // Shared validation schema for create/edit
 const customerSchema = z.object({
@@ -19,14 +17,15 @@ const customerSchema = z.object({
 type CustomerFormValues = z.infer<typeof customerSchema>
 
 function CustomerEditForm({ customer, onClose }: { customer: Customer; onClose: () => void }) {
-  const dispatch = useDispatch<AppDispatch>()
+
+  const { updateCustomerAsync } = useCustomerActions()
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<CustomerFormValues>({
     resolver: zodResolver(customerSchema),
     defaultValues: { name: customer.name, email: customer.email },
   })
 
   const onSubmit = async (values: CustomerFormValues) => {
-    await dispatch(updateCustomerAsync({ ...customer, name: values.name.trim(), email: values.email.trim() })).unwrap()
+    await updateCustomerAsync({ ...customer, name: values.name.trim(), email: values.email.trim() })
     onClose()
   }
 
@@ -49,8 +48,17 @@ function CustomerEditForm({ customer, onClose }: { customer: Customer; onClose: 
 }
 
 export default function Customers() {
-  const dispatch = useDispatch<AppDispatch>()
-  const { items, status, error } = useSelector((s: RootState) => s.customers)
+
+  const { addCustomerAsync, fetchCustomersAsync } = useCustomerActions()
+  const { error, status, items } = useCustomers()
+
+  const fetchCustomers = React.useCallback(async () => {
+    await fetchCustomersAsync()
+  }, [fetchCustomersAsync])
+
+  React.useEffect(() => {
+    fetchCustomers()
+  }, [fetchCustomers])
 
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<CustomerFormValues>({
     resolver: zodResolver(customerSchema),
@@ -58,12 +66,8 @@ export default function Customers() {
   })
   const [editing, setEditing] = React.useState<Customer | null>(null)
 
-  React.useEffect(() => {
-    dispatch(fetchCustomersAsync())
-  }, [dispatch])
-
   const onAdd = async (values: CustomerFormValues) => {
-    await dispatch(addCustomerAsync({ name: values.name.trim(), email: values.email.trim() })).unwrap()
+    await addCustomerAsync({ name: values.name.trim(), email: values.email.trim() })
     reset()
   }
 
@@ -102,7 +106,7 @@ export default function Customers() {
                       <p className="text-xs text-neutral-500">{c.email}</p>
                     </div>
                     <Button onClick={() => setEditing(c)} className="bg-blue-600 hover:bg-blue-500">Edit</Button>
-                    <Button onClick={() => dispatch(deleteCustomerAsync(c.id))} className="bg-red-600 hover:bg-red-500">Delete</Button>
+                    {/* <Button onClick={() => dispatch(deleteCustomerAsync(c.id))} className="bg-red-600 hover:bg-red-500">Delete</Button> */}
                   </>
                 )}
               </li>

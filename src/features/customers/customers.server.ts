@@ -1,10 +1,10 @@
 'use server'
 import * as grpc from '@grpc/grpc-js';
 import { prisma } from "@/lib/prisma";
-import { Customer } from "./customerSlice";
 import { Customer as CustomerProto, UpdateCustomerReq } from '@/lib/grpc/customers_pb';
 import { CustomerServiceClient } from "@/lib/grpc/customers_grpc_pb";
 import { AddCustomerReq, ListCustomersReq } from '@/lib/grpc/customers_pb';
+import { Customer } from './customerStore';
 
 export const getAllCustomers = async () => {
     const customers = await prisma.customer.findMany({

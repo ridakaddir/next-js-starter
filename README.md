@@ -35,7 +35,7 @@ The server listens on port `50051`.
 	- `yarn prisma:generate` – Generate Prisma client
 	- `yarn prisma:migrate` – Run migrations
 
-Project includes Tailwind, Redux Toolkit, Zod, and a minimal UI kit.
+Project includes Tailwind, Zustand, Zod, and a minimal UI kit.
 
 ---
 
