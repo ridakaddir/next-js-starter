@@ -1,11 +1,14 @@
-import { createCustomer, deleteCustomer, getAllCustomers, updateCustomer } from 'features/customers/customers.server'
+import { createCustomer, deleteCustomer, getAllCustomersFromgRPC, updateCustomer } from 'features/customers/customers.server'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Customer as CustomerServer } from '@/lib/grpc/customers_pb'
 
-export type Customer = {
-  id: string
-  name: string
-  email: string
-}
+// export type Customer = {
+//   id: string
+//   name: string
+//   email: string
+// }
+
+export type Customer = Pick<CustomerServer.AsObject, 'id' | 'name' | 'email'>
 
 type CustomersState = {
   items: Customer[]
@@ -23,7 +26,7 @@ const initialState: CustomersState = {
 export const fetchCustomersAsync = createAsyncThunk<Customer[]>(
   'customers/fetchAll',
   async () => {
-    return getAllCustomers();
+    return getAllCustomersFromgRPC()
   }
 )
 

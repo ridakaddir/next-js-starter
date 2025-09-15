@@ -7,11 +7,16 @@
     "build": "next build --turbopack",
     "start": "node .next/server.js",
     "lint": "eslint",
+    "grpc:generate:js": "grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./src/lib/grpc --grpc_out=grpc_js:./src/lib/grpc -I ./mock-grpc-server ./mock-grpc-server/*.proto",
+    "grpc:generate:ts": "protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts -I ./mock-grpc-server --ts_out=src/lib/grpc ./mock-grpc-server/*.proto",
+    "grpc:generate": "yarn grpc:generate:js && yarn grpc:generate:ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.13.4",
+    "@grpc/proto-loader": "^0.8.0",
     "@hookform/resolvers": "^5.2.1",
     "@prisma/client": "^6.14.0",
     "@reduxjs/toolkit": "^2.8.2",
@@ -29,10 +34,15 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.5.0",
+    "grpc-tools": "^1.13.0",
+    "grpc_tools_node_protoc_ts": "^5.3.3",
+    "postcss": "^8.5.6",
     "prisma": "^6.14.0",
     "tailwindcss": "^4",
+    "ts-proto": "^2.7.7",
     "typescript": "^5"
   }
 }

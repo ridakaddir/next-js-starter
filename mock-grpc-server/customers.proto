@@ -1,0 +1,40 @@
+syntax = "proto3";
+package customers;
+
+option go_package = "server/customers";
+
+message Customer {
+    string id = 1;
+    string name = 2;
+    string email =3;
+    string createdAt =4;
+    string updatedAt = 5;
+}
+
+service CustomerService {
+    rpc ListCustomers(ListCustomersReq) returns (ListCustomersRes);
+    rpc AddCustomer(AddCustomerReq) returns (AddCustomerRes);
+    rpc UpdateCustomer(UpdateCustomerReq) returns (UpdateCustomerRes);
+}
+
+message AddCustomerReq {
+    Customer customer = 1;
+}
+
+message AddCustomerRes {
+    Customer customer = 1;
+}
+
+message UpdateCustomerReq {
+    Customer customer = 1;
+}
+
+message UpdateCustomerRes {
+    Customer customer = 1;
+}
+
+message ListCustomersReq {}
+
+message ListCustomersRes {
+    repeated Customer customers = 1;
+}

@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+/* @source not "../../kickstart"; */
+@source "../";
 
 :root {
   --background: #ffffff;
